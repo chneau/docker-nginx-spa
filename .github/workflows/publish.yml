@@ -1,0 +1,20 @@
+on:
+    workflow_dispatch:
+      inputs:
+        release:
+          description: "Release version"
+          type: string
+          required: true
+
+  jobs:
+    publish:
+      runs-on: ubuntu-latest
+      permissions:
+        packages: write
+        contents: read
+      steps:
+        - uses: actions/checkout@v4
+        - run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/nginx-spa:${{ inputs.release }}" >> $GITHUB_ENV
+        - run: echo "${{ github.token }}" | docker login ghcr.io --username $ --password-stdin
+        - run: DOCKER_BUILDKIT=1 docker build --tag ${{ env.IMAGE_NAME }} .
+        - run: docker push ${{ env.IMAGE_NAME }}
