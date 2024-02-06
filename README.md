@@ -1,11 +1,12 @@
 # docker-nginx-spa
 
-Docker image used to serve a Single Page App with environment substitution
+Docker image used to serve a Single Page App with environment substitution.  
+This image is built every day at 00:00 UTC.
 
 ## Test it!
 
 ```bash
-docker run --rm -it -e SUBST=nginx -e nginx=HACKED -p 7777:80 ghcr.io/chneau/nginx-spa:latest
+docker run --rm -it -e SUBST=nginx -e nginx=HACKED -p 7777:80 ghcr.io/chneau/nginx-spa
 # open your browser at http://localhost:7777 to see all the nginx replaced with HACKED
 ```
 
