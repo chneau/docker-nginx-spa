@@ -14,9 +14,9 @@ docker run --rm -it -e SUBST=nginx -e nginx=HACKED -p 7777:80 ghcr.io/chneau/ngi
 
 ```Dockerfile
 FROM oven/bun:1 as build
-ENV VITE_CLIENT_ID="VITE_CLIENT_ID"
-ENV VITE_CLIENT_SECRET="VITE_CLIENT_SECRET"
-ENV VITE_REDIRECT_URI="VITE_REDIRECT_URI"
+ENV VITE_CLIENT_ID="X_VITE_CLIENT_ID"
+ENV VITE_CLIENT_SECRET="X_VITE_CLIENT_SECRET"
+ENV VITE_REDIRECT_URI="X_VITE_REDIRECT_URI"
 WORKDIR /app
 COPY package.json bun.lockb .
 RUN bun install --frozen-lockfile
@@ -32,11 +32,15 @@ COPY --from=build /app/dist /usr/share/nginx/html
 docker build -t test .
 
 # run it with with your own env var
-docker run --rm -it test -e SUBST=VITE_CLIENT_ID,VITE_CLIENT_SECRET,VITE_REDIRECT_URI -e VITE_CLIENT_ID=123 -e VITE_CLIENT_SECRET=456 -e VITE_REDIRECT_URI=http://localhost:3000 -p 7777:80 test
+docker run --rm -it test -e SUBST=X_VITE_CLIENT_ID,X_VITE_CLIENT_SECRET,X_VITE_REDIRECT_URI -e X_VITE_CLIENT_ID=123 -e X_VITE_CLIENT_SECRET=456 -e X_VITE_REDIRECT_URI=http://localhost:3000 -p 7777:80 test
 
 # First on your Vite build, you set the env vars to be replaced by theyr actual name
 # Then you add this nginx-spa image to at the end of your Dockerfile
 # When you run the image, you pass the env vars you want to replace
 # The nginx-spa will replace the env vars with the actual value
 # At the start of the container, it will print the env vars it replaced in which file
+# /!\ Careful not to use ENV VITE_CLIENT_ID="VITE_CLIENT_ID", when vite builds that,
+# it will replace the value on the left and the right of the assignment, therefore
+# it is better to use a prefix like X_VITE_CLIENT_ID, so that the nginx-spa can replace
+# the value on the right of the assignment only
 ```
