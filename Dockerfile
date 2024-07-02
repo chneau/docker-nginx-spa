@@ -4,6 +4,7 @@ COPY --chown=1000:1000 start.sh /
 RUN chown -R 1000:1000 /var/cache/nginx && \
     chown -R 1000:1000 /var/log/nginx && \
     chown -R 1000:1000 /etc/nginx/conf.d && \
+    chown -R 1000:1000 /usr/share/nginx && \
     touch /var/run/nginx.pid && \
     chown -R 1000:1000 /var/run/nginx.pid
 USER 1000:1000
