@@ -9,4 +9,4 @@ RUN chown -R 1000:1000 /var/cache/nginx && \
     chown -R 1000:1000 /var/run/nginx.pid
 USER 1000:1000
 ENV PREFIX=_
-ENTRYPOINT exec /start.sh
+ENTRYPOINT ["/start.sh"]
