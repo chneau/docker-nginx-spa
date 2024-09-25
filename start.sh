@@ -13,4 +13,4 @@ for VAR in $(printenv | grep "^$PREFIX" | awk -F "=" '{print $1}'); do
   done
 done
 
-nginx -g "daemon off;"
+exec nginx
