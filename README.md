@@ -32,7 +32,7 @@ COPY --from=build /app/dist /usr/share/nginx/html
 docker build -t test .
 
 # run it with with your own env var
-docker run --rm -it test -e __VITE_CLIENT_ID=123 -e __VITE_CLIENT_SECRET=456 -e __VITE_REDIRECT_URI=http://localhost:3000 -p 7777:8080 test
+docker run --rm -it -e __VITE_CLIENT_ID=123 -e __VITE_CLIENT_SECRET=456 -e __VITE_REDIRECT_URI=http://localhost:3000 -p 7777:8080 test
 
 # By default the prefix is _, you can change it with the PREFIX env var
 # Just add a _ to the value you want to replace in your SPA files
