@@ -17,14 +17,8 @@ jobs:
       - name: Build test image
         run: docker build -t test-nginx-spa .
 
-      - name: Test environment replacement and health
-        run: |
-          docker run -d --name test-container \
-            -e _TEST_VAR="hello_world_123" \
-            -p 8080:8080 test-nginx-spa
-          sleep 2
-          docker exec test-container wget --spider -q http://127.0.0.1:8080/
-          docker stop test-container
+      - name: Run tests
+        run: ./test.sh test-nginx-spa
 
   publish:
     needs: test
