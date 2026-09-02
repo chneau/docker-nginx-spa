@@ -1,7 +1,8 @@
 # docker-nginx-spa
 
 [![Publish Docker image](https://github.com/chneau/docker-nginx-spa/actions/workflows/publish.yml/badge.svg)](https://github.com/chneau/docker-nginx-spa/actions/workflows/publish.yml)
-[![Docker Image Size](https://img.shields.io/docker/image-size/chneau/nginx-spa?registry_uri=ghcr.io)](https://ghcr.io/chneau/docker-nginx-spa)
+[![Docker Image](https://img.shields.io/badge/docker_image-ghcr.io%2Fchneau%2Fnginx--spa-blue?logo=docker)](https://ghcr.io/chneau/nginx-spa)
+
 
 Lightweight Alpine-based Nginx Docker image designed to serve Single Page Applications (React, Vue, Vite, Svelte, Angular, etc.) with **runtime environment variable substitution**.
 
