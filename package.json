@@ -1,0 +1,8 @@
+{
+  "name": "docker-nginx-spa",
+  "private": true,
+  "scripts": {
+    "build": "docker build -t chneau/nginx-spa .",
+    "test": "./test.sh"
+  }
+}
